@@ -72,8 +72,7 @@ int adminView()
 			case 1: registerStudent();break;  
 			case 2: deleteAllStudents(); break;
 			case 3: checkListOfStudentsRegistered(); break;
-			case 4: checkPresenseCountbyRollno(); break;  ////
-			case 5: getListOfStudentsWithTheirPresenseCount(); break; // 
+			case 4: checkPresenseCountbyRollno(); break;  
 			case 0: goBack = 1;break;
 	                default: cout<<"\n Invalid choice. Enter again ";
 	                 getchar();           	
@@ -140,14 +139,6 @@ int checkPresenseCountbyRollno()
 	return 0;
 }
 
-int getListOfStudentsWithTheirPresenseCount()
-{
-	cout<<"\n All Students with their Presense count !!";
-	
-        cout<<"\n Please any key to continue..";
-	getchar(); getchar();
-	return 0;
-}
 
 int registerStudent()
 {

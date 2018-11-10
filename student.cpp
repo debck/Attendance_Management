@@ -8,12 +8,14 @@
 #include <sstream>
 #include "student_header.h"
 #include "admin_header.h"
+#include "teacher_header.h"
 using namespace std;
 
 int studentView(); //student
 int studentLogin(); //student
 int checkStudentCredentials(string userName, string password); //student
 int adminLogin();//a
+int teacherlogin();
 int markMyAttendance(string username);//studnet
 int countMyAttendance(string username);//studnet
 int sendLeaveApplication(string username);//student
@@ -47,9 +49,8 @@ if(res  == 0)
     {
 		system("cls");
 	
-		cout<<"\n 1 Mark Attendance fo Today ";
-		cout<<"\n 2 Count my Attendance";
-		cout<<"\n 3 Send a leave application";
+		cout<<"\n 1 Count my Attendance";
+		cout<<"\n 2 Send a leave application";
 		cout<<"\n 0. Go Back <- \n";
 		int choice;
 		
@@ -58,9 +59,8 @@ if(res  == 0)
 		
 		switch(choice)
 		{
-			case 1: markMyAttendance(username); break;
-			case 2: countMyAttendance(username); break;
-			case 3: sendLeaveApplication(username);break;
+			case 1: countMyAttendance(username); break;
+			case 2: sendLeaveApplication(username);break;
 			case 0: goBack = 1;break;
 	                default: cout<<"\n Invalid choice. Enter again ";
 	                getchar();           	
@@ -118,38 +118,6 @@ int student::checkStudentCredentials(string username, string password)
 }
 
 
-int student::markMyAttendance(string username)
-{
-	string filename = username+".dat";
-	ifstream read;
-	read.open(filename.c_str(), ios::app);
-	// ifstream read;
-	// read.open("db.dat");
-	string line;
-	if(read)
-	{	
-		int line_no = 0;
-	while (line_no != 8 && getline(read, line)) {
-    ++line_no;
-	}
-	if (line_no == 8) {
-		int i;
-		istringstream(line)>>i;
-		
-		ofstream out1;
-		string temp = username+".dat";
-		out1.open(temp.c_str(), ios::app);
-		i++;
-		out1<<i;
-	}
-	}	
-
-cout<<"\n Please any key to continue..";
-
-getchar();getchar();
-
-return 0;	
-} 
 
 int student::countMyAttendance(string username)
 {		
@@ -254,6 +222,7 @@ int student::sendLeaveApplication(string username)
 
 
 
+
 int main(int argc, char** argv) {
 	
 	while(1)
@@ -265,7 +234,7 @@ int main(int argc, char** argv) {
 		
 		cout<<"1. Student Login\n";
 		cout<<"2. Admin Login\n";
-		
+		cout<<"3. teacher Login\n";
 		cout<<"0. Exit\n";
 		int choice;
 		
@@ -276,6 +245,7 @@ int main(int argc, char** argv) {
 		{
 			case 1: studentLogin(); break;
 			case 2: adminLogin(); break;
+			case 3: teacherlogin();break;
 			case 0: 
 			        while(1)
 			        {
