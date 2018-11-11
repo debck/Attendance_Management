@@ -7,13 +7,12 @@
 #include <typeinfo>
 #include <stdlib.h>
 #include <sstream>
-#include "student_header.h"
-#include "admin_header.h"
+
 #include "teacher_header.h"
-using namespace std;
 
 
-int markMyAttendance();
+
+int Attendance();
 int teacherView();
 int teacherlogin();
 
@@ -21,7 +20,7 @@ int teacherlogin();
 int teacherlogin()
 {
 	system("cls");
-	cout<<"\n -------------------- Teacher Login -----------------";	
+	cout<<"\n -------------------- Teacher Login ----------------------";	
 
         string username;
 	string password;
@@ -50,7 +49,7 @@ int teacherlogin()
 
 
 
-int markMyAttendance()
+int Attendance()
 {   ifstream read;
     read.open("db.dat");
     
@@ -62,13 +61,24 @@ int markMyAttendance()
     	    	char name[100];
     	    	strcpy(name, line.c_str());
     	    	string filename = name;
-	            ifstream read;
+
+    int total_lines = 0;
+            ifstream read1;
+	read1.open(filename.c_str(), ios::app);
+	string line;
+	while(getline(read1,line)){
+			++ total_lines;
+		}
+    read1.close();
+
+
+	ifstream read;
 	read.open(filename.c_str(), ios::app);
 	// ifstream read;
 	// read.open("db.dat");
     cout<<"name:"<<filename<<endl;
     int c;
-    cout<<"1: present:"<<"\n"<<"O -> absent:"<<endl;
+    cout<<"1: present:"<<"\t"<<"O : absent:"<<endl;
     cout<<"enter choice:"<<endl;
     cin>>c;
     switch(c)
@@ -78,18 +88,18 @@ int markMyAttendance()
                 if(read)
                 {	
                     int line_no = 0;
-                while (line_no != 8 && getline(read, line)) {
+                while (line_no != total_lines && getline(read, line)) {
                 ++line_no;
                 }
-                if (line_no == 8) {
+                if (line_no == total_lines) {
                     int i;
                     istringstream(line)>>i;
-                    int rem = i%10;
-                    rem++;
+                    i++;
+
                     ofstream out1;
                     string temp = name;
                     out1.open(temp.c_str(), ios::app);
-                    out1<< rem;
+                    out1<<i<<"\n";
 
                 }
                 }	
@@ -113,6 +123,12 @@ getchar();getchar();
 return 0;	
 }
 
+
+
+
+
+
+
 int teacherView()
 {	
     int goBack = 0;
@@ -128,7 +144,7 @@ int teacherView()
 		
 		switch(choice)
 		{
-			case 1: markMyAttendance();break;  
+			case 1: Attendance();break;  
 			case 0: goBack = 1;break;
 	                default: cout<<"\n Invalid choice. Enter again ";
 	                 getchar();           	

@@ -6,20 +6,19 @@
 #include <typeinfo>
 #include <stdlib.h>
 #include <sstream>
+
 #include "student_header.h"
-#include "admin_header.h"
-#include "teacher_header.h"
+
 using namespace std;
 
-int studentView(); //student
-int studentLogin(); //student
-int checkStudentCredentials(string userName, string password); //student
-int adminLogin();//a
+int studentView(); 
+int studentLogin(); 
+int checkStudentCredentials(string userName, string password); 
+int adminLogin();
 int teacherlogin();
-int markMyAttendance(string username);//studnet
-int countMyAttendance(string username);//studnet
-int sendLeaveApplication(string username);//student
-int m=0;
+int Attendance(string username);
+int sendLeaveApplication(string username);
+
 int total=10;
 
 
@@ -59,7 +58,7 @@ if(res  == 0)
 		
 		switch(choice)
 		{
-			case 1: countMyAttendance(username); break;
+			case 1: Attendance(username); break;
 			case 2: sendLeaveApplication(username);break;
 			case 0: goBack = 1;break;
 	                default: cout<<"\n Invalid choice. Enter again ";
@@ -68,7 +67,7 @@ if(res  == 0)
 	   
 	   if(goBack == 1)
 	   {
-	   	break; //break the loop
+	   	break;
            }     
     	
    }
@@ -78,9 +77,9 @@ if(res  == 0)
 
 
 int studentLogin()
-{   student s;
+{   student s;      // creating object of class studnet
     system("cls");
-    cout<<"\n -------------------- Student Login -----------------";	
+    cout<<"\n -------------------- Student Login ----------------------";	
     s.studentView();
     return 0; 
 }
@@ -101,38 +100,62 @@ int student::checkStudentCredentials(string username, string password)
         	if(line == temp)
         	{
         		recordFound = 1;
-        		break;
 		}
         }
         
-        if(recordFound == 0)
-            return 0;
-        else
-           return 1;
-       }
-       else
-       {
+        if(recordFound == 1)
+            {
+				ifstream read;
+				string filename = username+".dat";
+				read.open(filename.c_str(), ios::app);
+				int line_number = 0;
+				while (line_number != 3 && getline(read, line)) {
+                ++line_number;
+                }
+				
+				if(line_number == 3){
+					if(password == line)
+						return 1;
+				}
+
+			}
+		else
+       	{
     	   return 0;
+      	 }
        }
+       
     		
 }
 
 
 
-int student::countMyAttendance(string username)
-{		
+int student::Attendance(string username)							// Function OVERLOADING
+{		int total_lines = 0;
 	string filename = username+".dat";
+
+
 	ifstream read;
 	read.open(filename.c_str(), ios::app);
-	
 	string line;
-	if(read)
+	while(getline(read,line)){
+			++ total_lines;
+		}
+
+	read.close();
+
+
+	ifstream read1;
+	 read1.open(filename.c_str(), ios::app);
+	if(read1)
 	{	
 		int line_no = 0;
-	while (line_no != 8 && getline(read, line)) {
+
+	while (line_no != total_lines && getline(read1, line)) {
     ++line_no;
 	}
-	if (line_no == 8) {
+	if (line_no == total_lines) {
+		
 		cout<<"\nTotal present: "<<line;
 		int i;
 		istringstream(line) >> i;
@@ -146,6 +169,9 @@ getchar();getchar();
 
 return 0;	
 } 
+
+
+
 
 int student::sendLeaveApplication(string username)
 {	

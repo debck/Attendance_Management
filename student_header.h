@@ -1,22 +1,12 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <cstring>
-#include <time.h>
-#include <typeinfo>
-#include <stdlib.h>
-#include <sstream>
+#include "user.h"
+using namespace std; 
 
-using namespace std;
-
-class student
+class student : public user
 {   
     string username,password;
     public:
         int studentView();
-        int studentLogin();
         int checkStudentCredentials(string username,string password);
-        int markMyAttendance(string username);
-        int countMyAttendance(string username);
+        int Attendance(string username);
         int sendLeaveApplication(string username);
 };

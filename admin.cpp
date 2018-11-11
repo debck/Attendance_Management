@@ -10,23 +10,22 @@
 
 using namespace std;
 
-int adminView();  //admin
-int deleteAllStudents();      //a
-int checkListOfStudentsRegistered(); //a
-int checkPresenseCountbyRollno();//a
-int getListOfStudentsWithTheirPresenseCount();//a
-int adminLogin();//a
-int registerStudent();//a
-
-
+int adminView(); 
+int deleteAllStudents();      
+int checkListOfStudentsRegistered(); 
+int checkPresenseCountbyRollno();
+int adminLogin();
+int registerStudent();
+int m = 0;
+int k =0;
 
 
 int adminLogin()
 {
 	system("cls");
-	cout<<"\n -------------------- Admin Login -----------------";	
+	cout<<"\n -------------------- Admin Login --------------------";	
 
-        string username;
+    string username;
 	string password;
 	
 	cout<<"\n Enter username : ";
@@ -58,9 +57,8 @@ int adminView()
 		system("cls");
 		cout<<"\n 1 Register a Student";
 		cout<<"\n 2 Delete All students name registered";
-		cout<<"\n 3 Check List of Student registered by userame";
+		cout<<"\n 3 Check List of Student registered by username";
 		cout<<"\n 4 Check presense count of any student by Roll No";
-		cout<<"\n 5 Get List of student with their attendance count";
 		cout<<"\n 0. Go Back <- \n";
 		int choice;
 		
@@ -144,8 +142,8 @@ int registerStudent()
 {
     cout<<"\n ----- Form to Register Student ---- \n";	
 
-    string name, username, password, rollno, address, father, mother;
-     int total,m;
+    string name, username, password, rollno, branch;
+     int total;
 
     cout<<"\n Enter Name : ";     cin>>name;
     
@@ -157,13 +155,7 @@ int registerStudent()
     cout<<"\n Enter rollno : ";     cin>>rollno;
     getchar();
     
-    char add[100];
-    cout<<"\n Enter address : ";     cin.getline(add, 100);
-    
-    cout<<"\n Enter father : ";     cin>>father;
-    
-    cout<<"\n Enter mother : ";     cin>>mother;
-    
+    cout<<"\n Enter branch : ";     cin>>branch;
 	cout<<"\n Enter initial number of presents :"; cin>>m;
 
     
@@ -191,7 +183,7 @@ int registerStudent()
 	}
     read.close();
 
-        ofstream out;
+    ofstream out;
 	out.open("db.dat", ios::app);
 	out<<username+".dat"<<"\n";
 	out.close();
@@ -200,10 +192,9 @@ int registerStudent()
 	string temp = username+".dat";
 	out1.open(temp.c_str());
 	out1<<name<<"\n"; 	out1<<username<<"\n"; 	out1<<password<<"\n";
-	out1<<rollno<<"\n"; 	out1<<add<<"\n"; 	out1<<father<<"\n";
-	out1<<mother<<"\n"; 
+	out1<<rollno<<"\n"; 	out1<<branch<<"\n"; 
 
-	out1<<m;  
+	out1<<m<<"\n";  
 
 	out1.close();
 

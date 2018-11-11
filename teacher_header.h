@@ -1,19 +1,10 @@
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <cstring>
-#include <time.h>
-#include <typeinfo>
-#include <stdlib.h>
-#include <sstream>
-
+#include "user.h"
 using namespace std;
 
-class teacher
+class teacher: public user
 {   
     string username,password;
     public:
-        int markMyAttendance(string username);
+        int Attendance();
         int teacherView();
-        int teacherlogin();
 };
