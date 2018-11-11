@@ -13,7 +13,6 @@ using namespace std;
 int adminView(); 
 int deleteAllStudents();      
 int checkListOfStudentsRegistered(); 
-int checkPresenseCountbyRollno();
 int adminLogin();
 int registerStudent();
 int m = 0;
@@ -58,7 +57,6 @@ int adminView()
 		cout<<"\n 1 Register a Student";
 		cout<<"\n 2 Delete All students name registered";
 		cout<<"\n 3 Check List of Student registered by username";
-		cout<<"\n 4 Check presense count of any student by Roll No";
 		cout<<"\n 0. Go Back <- \n";
 		int choice;
 		
@@ -69,8 +67,7 @@ int adminView()
 		{
 			case 1: registerStudent();break;  
 			case 2: deleteAllStudents(); break;
-			case 3: checkListOfStudentsRegistered(); break;
-			case 4: checkPresenseCountbyRollno(); break;  
+			case 3: checkListOfStudentsRegistered(); break;  
 			case 0: goBack = 1;break;
 	                default: cout<<"\n Invalid choice. Enter again ";
 	                 getchar();           	
@@ -111,15 +108,41 @@ int checkListOfStudentsRegistered(){
 	    string line;
     	    while(getline(read, line)) {
     	    	
-    	    	char name[100];
+				char name[100];
     	    	strcpy(name, line.c_str());
-    	    	char onlyname[100];
-    	    	strncpy(onlyname, name, (strlen(name) - 4));
-    	    	cout<<" \n " << onlyname;
+    	    	string filename = name;
+				cout<<"\n"<<filename;
+
+				int total_lines = 0;
+            ifstream read1;
+			read1.open(filename.c_str(), ios::app);
+			string line;
+			while(getline(read1,line)){
+				++ total_lines;
+			}
+    		read1.close();
+			ifstream read;
+			read.open(filename.c_str(), ios::app);
+			string l;
+                if(read)
+                {	
+                    int line_no = 0;
+                while (line_no != total_lines && getline(read, l)) {
+                ++line_no;
+                }
+                if (line_no == total_lines) {
+					cout<<"-> "<<l<<"\n";}
+				read.close();
+    	    	// char name[100];
+    	    	// strcpy(name, line.c_str());
+    	    	// char onlyname[100];
+    	    	// strncpy(onlyname, name, (strlen(name) - 4));
+    	    	// cout<<" \n " << onlyname;
 
             }
     read.close();        
     }
+	}
     else
     {
     	cout<<"\n No Record found :(";
@@ -131,11 +154,6 @@ int checkListOfStudentsRegistered(){
     return 0;
 }
 
-int checkPresenseCountbyRollno()
-{
-	cout<<"checkPresenseCountbyRollno"<<"\n";
-	return 0;
-}
 
 
 int registerStudent()

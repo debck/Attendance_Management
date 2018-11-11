@@ -46,8 +46,8 @@ if(res  == 0)
     int goBack = 0;
 	while(1)
     {
+		
 		system("cls");
-	
 		cout<<"\n 1 Count my Attendance";
 		cout<<"\n 2 Send a leave application";
 		cout<<"\n 0. Go Back <- \n";
@@ -89,43 +89,34 @@ int student::checkStudentCredentials(string username, string password)
 	
 	ifstream read;
 	read.open("db.dat");
-	
+	int recordFound = 0;
 	if (read) {
-  
-        int recordFound = 0;
-        string line;
+  		string line;
         string temp = username +".dat";
-        cout<<"\n file name is : "<<temp;
         while(getline(read, line)) {
         	if(line == temp)
         	{
         		recordFound = 1;
 		}
         }
-        
+	}
+    read.close();   
         if(recordFound == 1)
             {
 				ifstream read;
 				string filename = username+".dat";
 				read.open(filename.c_str(), ios::app);
 				int line_number = 0;
+				string line;
 				while (line_number != 3 && getline(read, line)) {
                 ++line_number;
                 }
-				
-				if(line_number == 3){
-					if(password == line)
-						return 1;
-				}
-
+				if(password == line)
+					return 1;
+				else
+					return 0;
 			}
-		else
-       	{
-    	   return 0;
-      	 }
-       }
-       
-    		
+       	
 }
 
 

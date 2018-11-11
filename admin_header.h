@@ -7,6 +7,5 @@ class Admin : public user
     public:
         int deleteAllStudents();
         int checkListOfStudentsRegistered();
-        int checkPresenseCountbyRollno();
         int registerStudent();
 };
