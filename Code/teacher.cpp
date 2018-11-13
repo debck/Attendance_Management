@@ -46,9 +46,6 @@ int teacherlogin()
 }
 
 
-
-
-
 int Attendance()
 {   ifstream read;
     read.open("db.dat");
