@@ -47,8 +47,8 @@ if(res  == 0)
     {
 		
 		system("cls");
-		cout<<"\n 1 Count my Attendance";
-		cout<<"\n 2 Send a leave application";
+		cout<<"\n 1 To count my Attendance";
+		cout<<"\n 2 To send a leave application";
 		cout<<"\n 0. Go Back <- \n";
 		int choice;
 		
